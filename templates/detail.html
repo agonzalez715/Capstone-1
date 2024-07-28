@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+            </ul>
+        </nav>
+        <h1>{{ car.make }} {{ car.model }} Details</h1>
+    </header>
+    <main>
+        <p>Year: {{ car.year }}</p>
+        <p>Price: {{ car.price }}</p>
+        <p>Fuel Efficiency: {{ car.fuel_efficiency }}</p>
+        <p>Safety Rating: {{ car.safety_rating }}</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 Car Information App</p>
+    </footer>
+</body>
+</html>
