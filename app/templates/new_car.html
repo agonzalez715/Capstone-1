@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Car</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+            </ul>
+        </nav>
+        <h1>Add New Car</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('main.add_car') }}" method="POST">
+            <label for="make">Make:</label>
+            <input type="text" id="make" name="make" required><br><br>
+
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" required><br><br>
+
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" required><br><br>
+
+            <label for="fuel_type">Fuel Type:</label>
+            <input type="text" id="fuel_type" name="fuel_type"><br><br>
+
+            <label for="drive">Drive:</label>
+            <input type="text" id="drive" name="drive"><br><br>
+
+            <label for="cylinders">Cylinders:</label>
+            <input type="number" id="cylinders" name="cylinders"><br><br>
+
+            <label for="transmission">Transmission:</label>
+            <input type="text" id="transmission" name="transmission"><br><br>
+
+            <label for="city_mpg">City MPG:</label>
+            <input type="number" id="city_mpg" name="city_mpg"><br><br>
+
+            <label for="highway_mpg">Highway MPG:</label>
+            <input type="number" id="highway_mpg" name="highway_mpg"><br><br>
+
+            <label for="combined_mpg">Combined MPG:</label>
+            <input type="number" id="combined_mpg" name="combined_mpg"><br><br>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required><br><br>
+
+            <input type="submit" value="Add Car">
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Car Information App</p>
+    </footer>
+</body>
+</html>

@@ -1,26 +1,34 @@
-from datetime import datetime
-from app import db
+# from app import db  # Import db from the current package
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 class Car(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     make = db.Column(db.String(50), nullable=False)
     model = db.Column(db.String(50), nullable=False)
     year = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    fuel_efficiency = db.Column(db.Float)
-    safety_rating = db.Column(db.Float)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    fuel_type = db.Column(db.String(20), nullable=True)
+    drive = db.Column(db.String(10), nullable=True)
+    cylinders = db.Column(db.Integer, nullable=True)
+    transmission = db.Column(db.String(20), nullable=True)
+    city_mpg = db.Column(db.Integer, nullable=True)
+    highway_mpg = db.Column(db.Integer, nullable=True)
+    combined_mpg = db.Column(db.Integer, nullable=True)
+    price = db.Column(db.Float, nullable=False, default=0.0)
+    on_sale = db.Column(db.Boolean, default=False)
+    available = db.Column(db.Boolean, default=False)
+    is_active = db.Column(db.Boolean, default=True)
 
-    def __repr__(self):
-        return f"<Car {self.make} {self.model}>"
 
-class UserPreference(db.Model):
+
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False)
-    car_type = db.Column(db.String(50))
-    budget = db.Column(db.Float)
-    preferred_features = db.Column(db.String(200))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    favorites = db.relationship('Favorite', backref='user', lazy=True)
 
-    def __repr__(self):
-        return f"<UserPreference {self.user_id}>"
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    car_id = db.Column(db.Integer, db.ForeignKey('car.id'), nullable=False)
+    car = db.relationship('Car')

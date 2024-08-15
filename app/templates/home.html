@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Information App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+                <li><a href="{{ url_for('main.add_car') }}">Add New Car</a></li> <!-- Link to add a new car -->
+                <li><a href="{{ url_for('main.view_archive') }}">View Archive</a></li> <!-- New line added here -->
+            </ul>
+        </nav>
+        <h1>Welcome to the Car Information App</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Overview</h2>
+            <p>This website helps users find and compare information about various cars based on their preferences. Use the form to input your criteria and explore a list of cars that best match your needs.</p>
+        </section>
+        <section>
+            <h2>Features</h2>
+            <ul>
+                <li>Search for cars based on your preferences</li>
+                <li>Compare different car models</li>
+                <li>View detailed specifications, pricing, and reviews</li>
+                <li>View archived cars</li> <!-- Mention the feature here if needed -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Car Information App</p>
+    </footer>
+</body>
+</html>

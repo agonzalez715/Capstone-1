@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+            </ul>
+        </nav>
+        <h1>{{ car.make }} {{ car.model }} Details</h1>
+    </header>
+    <main>
+        <p>Year: {{ car.year }}</p>
+        <p>Price: ${{ car.price }}</p>
+        <p>Fuel Type: {{ car.fuel_type }}</p>
+        <p>Drive: {{ car.drive }}</p>
+        <p>Cylinders: {{ car.cylinders }}</p>
+        <p>Transmission: {{ car.transmission }}</p>
+        <p>City MPG: {{ car.city_mpg }}</p>
+        <p>Highway MPG: {{ car.highway_mpg }}</p>
+        <p>Combined MPG: {{ car.combined_mpg }}</p>
+
+        <!-- Display On Sale and Available Status -->
+        <p>On Sale: {{ 'Yes' if car.on_sale else 'No' }}</p>
+        <p>Available in Our Area: {{ 'Yes' if car.available else 'No' }}</p>
+        
+        <!-- Form to Update Status -->
+        <form action="{{ url_for('main.update_car_status', car_id=car.id) }}" method="POST">
+            <label>
+                <input type="checkbox" name="on_sale" {% if car.on_sale %}checked{% endif %}>
+                On Sale
+            </label>
+            <label>
+                <input type="checkbox" name="available" {% if car.available %}checked{% endif %}>
+                Available in Our Area
+            </label>
+            <button type="submit">Update Status</button>
+        </form>
+
+        <!-- Form to Archive (Soft Delete) Car -->
+        <form action="{{ url_for('main.delete_car', car_id=car.id) }}" method="POST" style="margin-top: 20px;">
+            <button type="submit" onclick="return confirm('Are you sure you want to archive this car?');">Archive Car</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Car Information App</p>
+    </footer>
+</body>
+</html>

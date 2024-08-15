@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+            </ul>
+        </nav>
+        <h1>Search Results</h1>
+    </header>
+    <main>
+        <ul>
+            {% for car in cars %}
+            <li>
+                <h2><a href="{{ url_for('main.car_detail', car_id=car.id) }}">{{ car.model }} ({{ car.year }})</a></h2>
+                <!-- Display On Sale and Available Status -->
+                <p>On Sale: {{ 'Yes' if car.on_sale else 'No' }}</p>
+                <p>Available in Our Area: {{ 'Yes' if car.available else 'No' }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2024 Car Information App</p>
+    </footer>
+</body>
+</html>

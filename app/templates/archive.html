@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archived Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+            </ul>
+        </nav>
+        <h1>Archived Cars</h1>
+    </header>
+    <main>
+        <ul>
+            {% for car in cars %}
+            <li>
+                <h2>{{ car.model }} ({{ car.year }})</h2>
+                <p>Price: ${{ car.price }}</p>
+                <form action="{{ url_for('main.restore_car', car_id=car.id) }}" method="POST">
+                    <button type="submit">Restore Car</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2024 Car Information App</p>
+    </footer>
+</body>
+</html>
