@@ -29,6 +29,11 @@
             
             <button type="submit">Search</button>
         </form>
+        
+        <!-- Button to show all available cars -->
+        <form action="{{ url_for('main.show_all_cars') }}" method="GET" style="margin-top: 20px;">
+            <button type="submit">Show All Available Cars</button>
+        </form>
     </main>
     <footer>
         <p>&copy; 2024 Car Information App</p>
