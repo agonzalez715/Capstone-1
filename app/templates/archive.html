@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archived Cars</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8"> <!-- Sets the character encoding for the document to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page is responsive and sets the initial scale for mobile devices -->
+    <title>Archived Cars</title> <!-- The title of the webpage, displayed on the browser tab -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Links to an external CSS file located in the 'static' folder to style the page -->
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="{{ url_for('main.home') }}">Home</a></li>
-                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li> <!-- Navigation link to the home page -->
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li> <!-- Navigation link to the car search form -->
             </ul>
         </nav>
-        <h1>Archived Cars</h1>
+        <h1>Archived Cars</h1> <!-- Main heading of the page, indicating that it displays archived cars -->
     </header>
     <main>
         <ul>
+            <!-- Loop through each car in the 'cars' list passed from the backend -->
             {% for car in cars %}
             <li>
+                <!-- Display the car model and year as a heading -->
                 <h2>{{ car.model }} ({{ car.year }})</h2>
+                <!-- Display the price of the car -->
                 <p>Price: ${{ car.price }}</p>
+                <!-- Form to restore an archived car -->
                 <form action="{{ url_for('main.restore_car', car_id=car.id) }}" method="POST">
-                    <button type="submit">Restore Car</button>
+                    <button type="submit">Restore Car</button> <!-- Button to submit the form and restore the car -->
                 </form>
             </li>
-            {% endfor %}
+            {% endfor %} <!-- End of the loop through cars -->
         </ul>
     </main>
     <footer>
-        <p>&copy; 2024 Car Information App</p>
+        <p>&copy; 2024 Car Information App</p> <!-- Footer text with a copyright notice -->
     </footer>
 </body>
 </html>

@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Details</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8"> <!-- Sets the character encoding for the document to UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures the page is responsive and sets the initial scale for mobile devices -->
+    <title>Car Details</title> <!-- The title of the webpage, displayed on the browser tab -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Links to an external CSS file located in the 'static' folder to style the page -->
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="{{ url_for('main.home') }}">Home</a></li>
-                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li> <!-- Navigation link to the home page -->
+                <li><a href="{{ url_for('main.form') }}">Search Cars</a></li> <!-- Navigation link to the car search form -->
             </ul>
         </nav>
-        <h1>{{ car.make }} {{ car.model }} Details</h1>
+        <h1>{{ car.make }} {{ car.model }} Details</h1> <!-- Main heading of the page, displaying the make and model of the car -->
     </header>
     <main>
-        <p>Year: {{ car.year }}</p>
-        <p>Price: ${{ car.price }}</p>
-        <p>Fuel Type: {{ car.fuel_type }}</p>
-        <p>Drive: {{ car.drive }}</p>
-        <p>Cylinders: {{ car.cylinders }}</p>
-        <p>Transmission: {{ car.transmission }}</p>
-        <p>City MPG: {{ car.city_mpg }}</p>
-        <p>Highway MPG: {{ car.highway_mpg }}</p>
-        <p>Combined MPG: {{ car.combined_mpg }}</p>
+        <p>Year: {{ car.year }}</p> <!-- Displays the year of the car -->
+        <p>Price: ${{ car.price }}</p> <!-- Displays the price of the car -->
+        <p>Fuel Type: {{ car.fuel_type }}</p> <!-- Displays the fuel type of the car (e.g., gas, diesel) -->
+        <p>Drive: {{ car.drive }}</p> <!-- Displays the drive type of the car (e.g., fwd, rwd) -->
+        <p>Cylinders: {{ car.cylinders }}</p> <!-- Displays the number of cylinders in the car's engine -->
+        <p>Transmission: {{ car.transmission }}</p> <!-- Displays the transmission type of the car (e.g., manual, automatic) -->
+        <p>City MPG: {{ car.city_mpg }}</p> <!-- Displays the city miles per gallon (MPG) of the car -->
+        <p>Highway MPG: {{ car.highway_mpg }}</p> <!-- Displays the highway miles per gallon (MPG) of the car -->
+        <p>Combined MPG: {{ car.combined_mpg }}</p> <!-- Displays the combined city and highway miles per gallon (MPG) of the car -->
 
         <!-- Display On Sale and Available Status -->
-        <p>On Sale: {{ 'Yes' if car.on_sale else 'No' }}</p>
-        <p>Available in Our Area: {{ 'Yes' if car.available else 'No' }}</p>
+        <p>On Sale: {{ 'Yes' if car.on_sale else 'No' }}</p> <!-- Displays whether the car is currently on sale -->
+        <p>Available in Our Area: {{ 'Yes' if car.available else 'No' }}</p> <!-- Displays whether the car is available in the user's area -->
         
         <!-- Form to Update Status -->
         <form action="{{ url_for('main.update_car_status', car_id=car.id) }}" method="POST">
             <label>
-                <input type="checkbox" name="on_sale" {% if car.on_sale %}checked{% endif %}>
+                <input type="checkbox" name="on_sale" {% if car.on_sale %}checked{% endif %}> <!-- Checkbox to update the on_sale status -->
                 On Sale
             </label>
             <label>
-                <input type="checkbox" name="available" {% if car.available %}checked{% endif %}>
+                <input type="checkbox" name="available" {% if car.available %}checked{% endif %}> <!-- Checkbox to update the available status -->
                 Available in Our Area
             </label>
-            <button type="submit">Update Status</button>
+            <button type="submit">Update Status</button> <!-- Button to submit the form and update the car's status -->
         </form>
 
         <!-- Form to Archive (Soft Delete) Car -->
         <form action="{{ url_for('main.archive_car', car_id=car.id) }}" method="POST" style="margin-top: 20px;">
-            <button type="submit" onclick="return confirm('Are you sure you want to archive this car?');">Archive Car</button>
+            <button type="submit" onclick="return confirm('Are you sure you want to archive this car?');">Archive Car</button> <!-- Button to submit the form and archive (soft delete) the car -->
         </form>
     </main>
     <footer>
-        <p>&copy; 2024 Car Information App</p>
+        <p>&copy; 2024 Car Information App</p> <!-- Footer text with a copyright notice -->
     </footer>
 </body>
 </html>
