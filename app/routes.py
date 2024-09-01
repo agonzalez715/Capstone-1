@@ -23,7 +23,7 @@ def results():
     print(car_type)
     
     # Query the database to filter cars by the selected make and ensure no duplicates by considering unique combinations of make, model, and year
-    cars = db.session.query(Car).filter_by(make=car_type, is_active=True).distinct(Car.make, Car.model, Car.year).all()
+    #.distinct(Car.make, Car.model, Car.year)
     print(len(cars))
     return render_template('results.html', cars=cars)
 
@@ -63,17 +63,17 @@ def get_cars():
 def add_car():
     if request.method == 'POST':
         # Collect data from the form
-        make = request.form['make']
-        model = request.form['model']
-        year = request.form['year']
-        fuel_type = request.form['fuel_type']
-        drive = request.form['drive']
-        cylinders = request.form['cylinders']
-        transmission = request.form['transmission']
-        city_mpg = request.form['city_mpg']
+        make = request.form['make'].strip()
+        model = request.form['model'].strip()
+        year = request.form['year'].strip()
+        fuel_type = request.form['fuel_type'].strip()
+        drive = request.form['drive'].strip()
+        cylinders = request.form['cylinders'].strip()
+        transmission = request.form['transmission'].strip()
+        city_mpg = request.form['city_mpg'].strip()
         highway_mpg = request.form['highway_mpg']
-        combined_mpg = request.form['combined_mpg']
-        price = request.form['price']
+        combined_mpg = request.form['combined_mpg'].strip()
+        price = request.form['price'].strip()
 
         # Create a new Car object
         new_car = Car(
